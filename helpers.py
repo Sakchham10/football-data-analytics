@@ -34,12 +34,35 @@ class Driver(object):
 
 ### Naake clean this up
 
+
+def scrape(endpoint, scroll=5):
+    driver = Driver().driver
+    current_url = ''
+    try:
+        driver.get(endpoint)
+    except:
+        return False
+    time.sleep(2)
+    current_url = driver.current_url
+    for i in range(1,scroll):
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(2)
+    time.sleep(5)
+    html = driver.execute_script("return document.documentElement.innerHTML")
+    siteData = SOUP(html, 'html.parser')
+    return siteData
+    
+
+    
+
+
 class Scraper(object):
     def __init__(self, endpoint):
         self.driver = Driver().driver
         self.endpoint = endpoint
         self.current_url = ''
         self.pull()
+        
 
     def pull(self):
         try:
