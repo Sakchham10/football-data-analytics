@@ -32,6 +32,7 @@ class Driver(object):
         self.driver.close()
 
 
+### Naake clean this up
 
 class Scraper(object):
     def __init__(self, endpoint):
